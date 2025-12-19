@@ -34,25 +34,17 @@ void main(List<String> args) {
 
 class Solution {
   List<List<int>> generate(int numRows) {
-    if (numRows == 0) {
-      return <List<int>>[];
-    }
     List<List<int>> triangle = [
       [1],
     ];
-    if (numRows == 1) {
-      return triangle;
-    }
-    triangle.add([1, 1]);
-    for (var i = 2; i < numRows; i++) {
-      List<int> last_row = triangle[i - 1];
+    for (var i = 1; i < numRows; i++) {
+      final List<int> last_row = triangle[i - 1];
       List<int> curr_row = List<int>.filled(i + 1, 1, growable: false);
       for (var j = 1; j < curr_row.length - 1; j++) {
         curr_row[j] = last_row[j - 1] + last_row[j];
       }
       triangle.add(curr_row);
     }
-    print(triangle);
     return triangle;
   }
 }
