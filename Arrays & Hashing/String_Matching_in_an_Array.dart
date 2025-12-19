@@ -1,29 +1,18 @@
-bool listEquals<T>(List<T> a, List<T> b) {
-  if (a.length != b.length) return false;
-  for (var i = 0; i < a.length; i++) {
-    if (a[i] != b[i]) return false;
-  }
-  return true;
-}
-
 void main(List<String> args) {
   Solution sol = Solution();
-  List<String> words = ["mass", "as", "hero", "superhero"];
+  final List<String> words = ["mass", "as", "hero", "superhero"];
   List<String> result = sol.stringMatching(words);
-  result.sort();
-  List<String> expected = ["as", "hero"];
-  expected.sort();
-  print(listEquals(result, expected));
+  final Set<String> expected = {"as", "hero"};
+  print(result.length == expected.length && expected.containsAll(result));
 }
 
 class Solution {
   List<String> stringMatching(List<String> words) {
     final Set<String> res = {};
-    for (var i = 0; i < words.length; i++) {
-      for (var j = 0; j < words.length; j++) {
-        if (i != j && words[j].contains(words[i])) {
-          res.add(words[i]);
-          break;
+    for (var ele1 in words) {
+      for (var ele2 in words) {
+        if (ele2.contains(ele1) && ele1 != ele2) {
+          res.add(ele1);
         }
       }
     }
